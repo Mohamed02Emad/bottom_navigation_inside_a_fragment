@@ -16,7 +16,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
-    private lateinit var navHostFragment: NavHostFragment
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var fragmentContainer2: FragmentContainerView
 
@@ -30,8 +29,13 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupNavigation()
+        setViews()
         setNavigationListener()
+    }
+
+    private fun setViews() {
+        fragmentContainer2 = binding.navHostFragment2
+        bottomNavigationView = binding.bottomNav
     }
 
     private fun setNavigationListener() {
@@ -50,13 +54,6 @@ class MainFragment : Fragment() {
                 else -> false
             }
         }
-    }
-
-    private fun setupNavigation() {
-        fragmentContainer2 = binding.navHostFragment2
-        navHostFragment = requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        bottomNavigationView = binding.bottomNav
-        NavigationUI.setupWithNavController(bottomNavigationView, navHostFragment.navController)
     }
 
     fun showToast(s: String) {
